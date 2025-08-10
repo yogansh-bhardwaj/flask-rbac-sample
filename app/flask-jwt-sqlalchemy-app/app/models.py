@@ -32,6 +32,7 @@ class Task(db.Model):
     task_name = db.Column(db.String(120), nullable=False)
     task_description = db.Column(db.String(500), nullable=True)
     is_completed = db.Column(db.Boolean, default=False)
+    visible_to_role = db.Column(db.String(64), nullable=True)
     project_id = db.Column(db.Integer, db.ForeignKey('project.project_id'), nullable=False)
     project = db.relationship('Project', backref=db.backref('tasks', lazy=True))
     

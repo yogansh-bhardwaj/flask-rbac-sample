@@ -12,12 +12,13 @@ def register():
     data = request.get_json()
     email = data.get('email')
     password = data.get('password')
+    role = data.get('role')
 
     if User.query.filter_by(email=email).first():
         return jsonify({"msg": "User already exists"}), 400
 
     hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
-    new_user = User(email=email, password=hashed_password)
+    new_user = User(email=email, password=hashed_password, role=role)
     db.session.add(new_user)
     db.session.commit()
 
